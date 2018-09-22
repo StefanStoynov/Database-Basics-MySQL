@@ -68,3 +68,50 @@ VALUES('Gosho',NULL,1.80,54.10,'m','1999-01-20','az sum Gosho'),
 ('Gopeto',NULL,1.83,54.70,'m','1999-11-20','az sum Gopeto'),
 ('Gopeto',NULL,1.83,54.70,'m','1999-11-20','az sum Gopeto'),
 ('Gopeto',NULL,1.83,54.70,'m','1999-11-20','az sum Gopeto');
+
+# 7.	Create Table Users
+/*
+Using SQL query create table users with columns:
+•	id – unique number for every user. There will be no more than 263-1 users. (Auto incremented)
+•	username – unique identifier of the user will be no more than 30 characters (non Unicode). (Required)
+•	password – password will be no longer than 26 characters (non Unicode). (Required)
+•	profile_picture – image with size up to 900 KB. 
+•	last_login_time
+•	is_deleted – shows if the user deleted his/her profile. Possible states are true or false.
+Make id primary key. Populate the table with 5 records. Submit your CREATE and INSERT statements. Submit your CREATE and INSERT statements as Run queries & check DB.
+*/
+USE people;
+CREATE TABLE users(
+	id INT(11) UNIQUE AUTO_INCREMENT NOT NULL,
+    username VARCHAR(30) UNIQUE NOT NULL,
+    password VARCHAR(26) NOT NULL,
+    profile_picture BLOB(900),
+    last_login_time DATETIME,
+    is_deleted BIT
+);
+ALTER TABLE users
+ADD PRIMARY KEY(id);
+INSERT INTO users (username, password, profile_picture, last_login_time, is_deleted)
+VALUES ('username1','12345', NULL, now(), 0),
+('username2','12345', NULL, now(), 0),
+('username3','12345', NULL, now(), 0),
+('username4','12345', NULL, now(), 0),
+('username5','12345', NULL, now(), 0); 
+
+# 8.	Change Primary Key
+/*
+Using SQL queries modify table users from the previous task. 
+First remove current primary key then create new primary key that would be combination of fields id and username.
+The initial primary key name on id is pk_users.
+Submit your query in Judge as Run skeleton, run queries & check DB.
+*/
+ALTER TABLE users
+MODIFY id INT NOT NULL;
+ALTER TABLE users
+DROP PRIMARY KEY;
+ALTER TABLE users
+ADD PRIMARY KEY (id, username);
+ALTER TABLE users
+MODIFY id INT NOT NULL AUTO_INCREMENT;
+
+

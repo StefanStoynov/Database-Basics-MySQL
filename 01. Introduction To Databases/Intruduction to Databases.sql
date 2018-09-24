@@ -214,3 +214,101 @@ VALUES ('title1', 1, '2000'),
 ('title3', 1, '2000'),
 ('title4', 1, '2000'),
 ('title5', 1, '2000');
+
+# 12.	Car Rental Database
+/*
+Using SQL queries create car_rental database with the following entities:
+•	categories (id, category, daily_rate, weekly_rate, monthly_rate, weekend_rate)
+•	cars (id, plate_number, make, model, car_year, category_id, doors, picture, car_condition, available)
+•	employees (id, first_name, last_name, title, notes)
+•	customers (id, driver_licence_number, full_name, address, city, zip_code, notes)
+•	rental_orders (id, employee_id, customer_id, car_id, car_condition, tank_level, kilometrage_start, 
+kilometrage_end, total_kilometrage, start_date, end_date, total_days, rate_applied, tax_rate, order_status, notes)
+Set most appropriate data types for each column. 
+Set primary key to each table. 
+Populate each table with 3 records. 
+Make sure the columns that are present in 2 tables would be of the same data type.
+Consider which fields are always required and which are optional. 
+Submit your CREATE TABLE and INSERT statements as Run queries & check DB.
+*/
+
+CREATE DATABASE car_rental;
+USE car_rental;
+CREATE TABLE categories(
+	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    category VARCHAR(50) NOT NULL,
+    daily_rate DECIMAL(6,2) NOT NULL,
+    weekly_rate DECIMAL(6,2) NOT NULL,
+    monthly_rate DECIMAL(7,2) NOT NULL,
+    weekend_rate DECIMAL(6,2) NOT NULL
+);
+CREATE TABLE cars(
+	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    plate_number VARCHAR(20) NOT NULL UNIQUE,
+    make VARCHAR(20) NOT NULL,
+    model VARCHAR(20) NOT NULL,
+    car_year DATE NOT NULL,
+    category_id INT NOT NULL,
+    doors INT NOT NULL,
+    picture BLOB,
+    car_condition VARCHAR(20) NOT NULL,
+    available BIT NOT NULL
+);
+CREATE TABLE employees(
+	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    title VARCHAR(5) NOT NULL,
+    notes TEXT
+);
+CREATE TABLE customers(
+	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    driver_licence_number VARCHAR(20) NOT NULL,
+	full_name VARCHAR (50) NOT NULL,
+    address VARCHAR (50) NOT NULL,
+    city VARCHAR (50) NOT NULL,
+	zip_code VARCHAR (50) NOT NULL,
+    notes TEXT
+);
+CREATE TABLE rental_orders(
+	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    employee_id INT NOT NULL,
+    customer_id INT NOT NULL,
+    car_id INT NOT NULL,
+    car_condition VARCHAR(20),
+    tank_level INT,
+    kilometrage_start INT,
+    kilometrage_end INT,
+    total_kilometrage INT,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+	total_days INT,
+    rate_applied ENUM ('daily_rate', 'weekly_rate', 'monthly_rate', 'weekend_rate') NOT NULL,
+    tax_rate DECIMAL (6,2) NOT NULL,
+    order_status TEXT,
+    notes TEXT
+);
+INSERT INTO categories(category, daily_rate, weekly_rate, monthly_rate, weekend_rate)
+VALUES('category1', 20, 30, 40, 50),
+('category2', 25, 35, 45, 55),
+('category3', 27, 37, 47, 57);
+
+INSERT INTO cars(plate_number, make, model, car_year, category_id, doors, car_condition, available)
+VALUES('plate1', 'make1', 'model1', '2017-06-15', 1, 4, 'good', 1),
+('plate2', 'make2', 'model2', '2017-06-15', 1, 4, 'good', 1),
+('plate3', 'make3', 'model3', '2017-06-15', 1, 4, 'good', 1);
+
+INSERT INTO employees(first_name, last_name, title)
+VALUES('name1','name11','Mr'),
+('name2','name21','Mr'),
+('name3','name31','Mr');
+
+INSERT INTO customers(driver_licence_number, full_name, address, city, zip_code)
+VALUES('licence1', 'name1', 'address1', 'city1', 'zip1'),
+('licence2', 'name2', 'address2', 'city2', 'zip2'),
+('licence3', 'name3', 'address3', 'city3', 'zip3');
+
+INSERT INTO rental_orders(employee_id, customer_id, car_id, start_date, end_date, rate_applied, tax_rate)
+VALUES(1,1,1,'2009-12-31','2010-12-31','daily_rate',0.5),
+(2,1,1,'2009-12-31','2010-12-31','daily_rate',0.5),
+(3,1,1,'2009-12-31','2010-12-31','daily_rate',0.5);

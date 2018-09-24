@@ -114,4 +114,24 @@ ADD PRIMARY KEY (id, username);
 ALTER TABLE users
 MODIFY id INT NOT NULL AUTO_INCREMENT;
 
+# 9.	Set Default Value of a Field
+/*
+Using SQL queries modify table users. Make the default value of last_login_time field to be the current time. 
+Submit your query in Judge as Run skeleton, run queries & check DB.
+*/
+
+USE people;
+ALTER TABLE users
+MODIFY last_login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+# 10. Set Unique Field
+/*
+Using SQL queries modify table users. 
+Remove username field from the primary key so only the field id would be primary key. 
+Now add unique constraint to the username field. The initial primary key name on (id, username) is pk_users.
+Submit your query in Judge as Run skeleton, run queries & check DB.
+*/
+
+
+
 

@@ -141,5 +141,76 @@ ALTER TABLE users
 MODIFY id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 MODIFY username VARCHAR(30) NOT NULL UNIQUE;
 
+# 11.	Movies Database
+/*
+Using SQL queries create Movies database with the following entities:
+•	directors (id, director_name, notes) 
+•	genres (id, genre_name, notes) 
+•	categories (id, category_name, notes)  
+•	movies (id, title, director_id, copyright_year, length, genre_id, category_id, rating, notes)
+Set most appropriate data types for each column.
+Set primary key to each table. Populate each table with 5 records. 
+Make sure the columns that are present in 2 tables would be of the same data type. 
+Consider which fields are always required and which are optional. 
+Submit your CREATE TABLE and INSERT statements as Run queries & check DB.
+*/
 
+CREATE DATABASE movies;
+USE movies;
+CREATE TABLE directors(
+	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    director_name VARCHAR(20) NOT NULL,
+    notes TEXT
+);
 
+CREATE TABLE genres(
+	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY UNIQUE,
+    genre_name VARCHAR(20) NOT NULL,
+    notes TEXT
+);
+
+CREATE TABLE categories(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(20) NOT NULL,
+    notes TEXT
+);
+
+CREATE TABLE movies(
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
+    title VARCHAR(20) NOT NULL,
+    director_id INT NOT NULL,
+    copyright_year YEAR NOT NULL,
+    length TIME,
+    genre_id INT,
+    category_id INT,
+    rating INT,
+    notes TEXT
+);
+
+INSERT INTO directors(director_name, notes)
+VALUES ('name1', 'null'),
+('name2', 'null'),
+('name3', 'null'),
+('name4', 'null'),
+('name5', 'null');
+
+INSERT INTO categories (category_name, notes)
+VALUES ('category_name1', 'null'),
+('category_name2', 'ull'),
+('category_name3','ull'),
+('category_name4', 'ull'),
+('category_name5', 'ull');
+
+INSERT INTO genres(genre_name, notes)
+VALUES ('genre_name1', 'null'),
+('genre_name2', 'null'),
+('genre_name3', 'null'),
+('genre_name4', 'null'),
+('genre_name5', 'null');
+
+INSERT INTO movies (title, director_id, copyright_year)
+VALUES ('title1', 1, '2000'),
+('title2', 1, '2000'),
+('title3', 1, '2000'),
+('title4', 1, '2000'),
+('title5', 1, '2000');

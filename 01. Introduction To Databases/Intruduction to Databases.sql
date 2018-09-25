@@ -312,3 +312,124 @@ INSERT INTO rental_orders(employee_id, customer_id, car_id, start_date, end_date
 VALUES(1,1,1,'2009-12-31','2010-12-31','daily_rate',0.5),
 (2,1,1,'2009-12-31','2010-12-31','daily_rate',0.5),
 (3,1,1,'2009-12-31','2010-12-31','daily_rate',0.5);
+
+# 13.	Hotel Database
+/*
+Using SQL queries create Hotel database with the following entities:
+•	employees (id, first_name, last_name, title, notes)
+•	customers (account_number, first_name, last_name, phone_number, emergency_name, emergency_number, notes)
+•	room_status (room_status, notes)
+•	room_types (room_type, notes)
+•	bed_types (bed_type, notes)
+•	rooms (room_number, room_type, bed_type, rate, room_status, notes)
+•	payments (id, employee_id, payment_date, account_number, first_date_occupied, last_date_occupied, 
+total_days, amount_charged, tax_rate, tax_amount, payment_total, notes)
+•	occupancies (id, employee_id, date_occupied, account_number, room_number, rate_applied, phone_charge, notes)
+Set most appropriate data types for each column. Set primary key to each table. Populate each table with 3 records.
+ Make sure the columns that are present in 2 tables would be of the same data type. 
+ Consider which fields are always required and which are optional. 
+ Submit your CREATE TABLE and INSERT statements as Run queries & check DB.
+*/
+
+CREATE DATABASE hotel;
+USE hotel;
+CREATE TABLE employees(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    title VARCHAR(10) NOT NULL,
+    notes TEXT
+);
+CREATE TABLE customers(
+	account_number INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    phone_number VARCHAR(50) NOT NULL,
+    emergency_name VARCHAR(20) NOT NULL,
+    emergency_number VARCHAR(50) NOT NULL,
+    notes TEXT
+);
+CREATE TABLE room_status(
+	room_status VARCHAR(20) NOT NULL PRIMARY KEY,
+    notes TEXT
+);
+CREATE TABLE room_types(
+	room_type VARCHAR(20) NOT NULL PRIMARY KEY,
+    notes TEXT
+);
+CREATE TABLE bed_types(
+	bed_type VARCHAR(20) NOT NULL PRIMARY KEY,
+    notes TEXT
+);
+CREATE TABLE rooms (
+	room_number INT NOT NULL PRIMARY KEY,
+    room_type VARCHAR(20) NOT NULL,
+    bed_type VARCHAR(20) NOT NULL,
+    rate INT NOT NULL,
+    room_status VARCHAR(20) NOT NULL,
+    notes TEXT
+);
+CREATE TABLE payments(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    employee_id INT NOT NULL,
+    payment_date DATE NOT NULL,
+    account_number INT NOT NULL,
+    first_date_occupied DATE NOT NULL,
+    last_date_occupied DATE NOT NULL,
+    total_days INT,
+	amount_charged DECIMAL (9,2) NOT NULL,
+    tax_rate DECIMAL (5,2) NOT NULL,
+    tax_amount DECIMAL (5,2),
+	payment_total DECIMAL(10,2),
+    notes TEXT
+);
+CREATE TABLE occupancies(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    employee_id INT NOT NULL,
+    date_occupied DATE NOT NULL,
+    account_number INT NOT NULL,
+    room_number INT NOT NULL,
+    rate_applied INT NOT NULL,
+    phone_charge DECIMAL (6,2),
+    notes TEXT
+);
+INSERT INTO employees (first_name, last_name, title)
+VALUES('name1','name11','Mr'),
+('name2','name11','Mr'),
+('name3','name11','Mr');
+
+INSERT INTO customers (first_name, last_name, phone_number, emergency_name, emergency_number)
+VALUES ('name1','name11','phone1','emname1','emnum1'),
+('name2','name11','phone1','emname1','emnum1'),
+('name2','name11','phone1','emname1','emnum1');
+
+INSERT INTO room_status (room_status)
+VALUES ('status1'),
+('status2'),
+('status3');
+
+INSERT INTO room_types (room_type)
+VALUES ('type1'),
+('type2'),
+('type3');
+
+INSERT INTO bed_types (bed_type)
+VALUES ('bed_type1'),
+('bed_type2'),
+('bed_type3');
+
+INSERT INTO rooms (room_number,room_type, bed_type, rate, room_status)
+VALUES (1,'type1', 'bed_type1' , 1 , 'status1'),
+(2,'type2', 'bed_type1' , 1 , 'status1'),
+(3,'type2', 'bed_type1' , 1 , 'status1');
+
+INSERT INTO payments (employee_id, payment_date, account_number, first_date_occupied, last_date_occupied, 
+ amount_charged, tax_rate)
+VALUES (1,'2000-11-11',111,'2000-11-11','2000-11-12', 65, 20),
+(2,'2000-11-11',1112,'2000-11-11','2000-11-12', 65, 20),
+(3,'2000-11-11',1113,'2000-11-11','2000-11-12', 65, 20);
+
+INSERT INTO occupancies (employee_id, date_occupied, account_number, room_number, rate_applied)
+VALUES (1,'2000-11-11',111,20,20),
+(2,'2000-11-11',1111,20,20),
+(3,'2000-11-11',1121,20,20);

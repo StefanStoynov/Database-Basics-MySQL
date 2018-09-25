@@ -42,5 +42,15 @@ Submit your query statements as Prepare DB & run queries.
 */
 
 SELECT concat(`first_name`,'.',`last_name`,'@softuni.bg')
- AS 'full_ email_address'
- FROM employees;
+AS 'full_ email_address'
+FROM employees;
+ 
+ /*
+ 6.	Find All Different Employee’s Salaries
+Write a SQL query to find all different employee’s salaries. 
+Show only the salaries. Sort the information by id.  
+Submit your query statements as Prepare DB & run queries. 
+ */
+
+SELECT DISTINCT salary FROM employees
+ORDER BY employee_id;

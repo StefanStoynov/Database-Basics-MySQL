@@ -551,3 +551,15 @@ SELECT name FROM departments
 ORDER BY name;
 SELECT first_name, last_name, job_title, salary FROM employees
 ORDER BY salary DESC;
+
+# 20.	Increase Employees Salary
+/*
+Use softuni database and increase the salary of all employees by 10%. 
+Select only salary column from the employees table.
+Submit your query statements as Prepare DB & Run queries.
+*/
+
+UPDATE employees
+SET salary = salary + salary*0.1;
+
+SELECT salary FROM employees;

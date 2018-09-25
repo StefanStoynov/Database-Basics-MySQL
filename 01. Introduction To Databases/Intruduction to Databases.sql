@@ -433,3 +433,48 @@ INSERT INTO occupancies (employee_id, date_occupied, account_number, room_number
 VALUES (1,'2000-11-11',111,20,20),
 (2,'2000-11-11',1111,20,20),
 (3,'2000-11-11',1121,20,20);
+
+# 14.	Create SoftUni Database
+/*
+Now create bigger database called soft_uni. You will use database in the future tasks.
+It should hold information about
+•	towns (id, name)
+•	addresses (id, address_text, town_id)
+•	departments (id, name)
+•	employees (id, first_name, middle_name, last_name, job_title, department_id, hire_date, salary, address_id)
+Id columns are auto incremented starting from 1 and increased by 1 (1, 2, 3, 4…).
+Make sure you use appropriate data types for each column. 
+Add primary and foreign keys as constraints for each table. Use only SQL queries. 
+Consider which fields are always required and which are optional. 
+Submit your CREATE TABLE  statements as Run queries & check DB.
+*/
+
+CREATE DATABASE soft_uni;
+USE soft_uni;
+CREATE TABLE towns(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL
+);
+CREATE TABLE addresses(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    address_text VARCHAR(100) NOT NULL,
+	town_id INT NOT NULL,
+    FOREIGN KEY (town_id) REFERENCES towns(id)
+);
+CREATE TABLE departments (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL 
+);
+CREATE TABLE employees (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(20) NOT NULL,
+    middle_name VARCHAR(20),
+    last_name VARCHAR(20) NOT NULL,
+	job_title VARCHAR(20) NOT NULL,
+    department_id INT NOT NULL,
+    FOREIGN KEY (department_id) REFERENCES departments(id),
+    hire_date DATE NOT NULL,
+    salary DECIMAL (6,2),
+    address_id INT NOT NULL,
+    FOREIGN KEY (address_id) REFERENCES addresses(id)
+);

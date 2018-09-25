@@ -508,3 +508,14 @@ VALUES('Ivan','Ivanov','Ivanov','.NET Developer',4,'2013-02-01',3500.00),
 ('Georgi','Terziev','Ivanov','CEO',2,'2007-12-09',3000.00),
 ('Peter','Pan','Pan','Intern',3,'2016-08-28',599.88);
 SELECT * FROM employees;
+
+# 17.	Basic Select All Fields
+/*
+Use the soft_uni database and first select all records from the towns, then from departments and finally 
+from employees table. Use SQL queries and submit them to Judge at once. 
+Submit your query statements as Prepare DB & Run queries.
+*/
+
+SELECT * FROM towns;
+SELECT * FROM departments;
+SELECT * FROM employees;

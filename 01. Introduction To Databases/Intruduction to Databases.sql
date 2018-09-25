@@ -563,3 +563,15 @@ UPDATE employees
 SET salary = salary + salary*0.1;
 
 SELECT salary FROM employees;
+
+# 21.	Decrease Tax Rate
+/*
+Use hotel database and decrease tax rate by 3% to all payments. 
+Select only tax_rate column from the payments table. Submit your query statements as Prepare DB & Run queries.
+*/
+
+USE hotel;
+UPDATE payments
+SET tax_rate =tax_rate - tax_rate * 0.03;
+
+SELECT tax_rate FROM payments;

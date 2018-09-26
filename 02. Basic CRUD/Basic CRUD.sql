@@ -243,3 +243,12 @@ country_code,
 (CASE WHEN currency_code !='EUR' THEN 'Not Euro' ELSE 'Euro' END) 
 FROM countries
 ORDER BY country_name;
+
+/*
+24.	 All Diablo Characters
+Display the name of all characters in alphabetical order. 
+Submit your query statements as Prepare DB & run queries.
+*/
+
+SELECT name FROM characters
+ORDER BY name;

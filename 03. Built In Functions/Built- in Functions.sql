@@ -9,3 +9,17 @@ Order the result by id. Submit your query statements as Prepare DB & run queries
 SELECT title FROM books
 WHERE substring(`title`,1,3) = 'The'
 ORDER BY id;
+
+/*
+2.	Replace Titles
+Write a SQL query to find books which titles start with “The” and replace the substring with 3 asterisks. 
+Retrieve data about the updated titles. Order the result by id. 
+Submit your query statements as Prepare DB & run queries. 
+*/
+
+UPDATE books 
+SET title = replace(`title`,'The','***');
+
+SELECT title FROM books
+WHERE substring(`title`,1,3) = '***'
+ORDER BY id;

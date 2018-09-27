@@ -23,3 +23,11 @@ SET title = replace(`title`,'The','***');
 SELECT title FROM books
 WHERE substring(`title`,1,3) = '***'
 ORDER BY id;
+
+/*
+Write a SQL query to sum prices of all books. 
+Format the output to 2 digits after decimal point. 
+Submit your query statements as Prepare DB & run queries. 
+*/
+
+SELECT FORMAT(sum(cost),2) FROM books;

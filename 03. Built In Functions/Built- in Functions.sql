@@ -143,4 +143,10 @@ CREATE VIEW `v_employees_hired_after_2000`
 AS SELECT first_name, last_name FROM employees
 WHERE YEAR(hire_date) > 2000;
 
+/*
+9.	Length of Last Name
+Write a SQL query to find the names of all employees whose last name is exactly 5 characters long.
+*/
 
+SELECT first_name, last_name FROM employees
+WHERE char_length(`last_name`) = 5;

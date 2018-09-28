@@ -198,3 +198,15 @@ Submit your query statements as Prepare DB & run queries.
 SELECT user_name, SUBSTRING(email,locate('@',`email`)+1) AS `Email Provider`
 FROM users
 ORDER BY `Email Provider`, user_name;
+
+/*
+14.	 Get Users with IP Address Like Pattern
+Find all user_name and  ip_address for each user sorted by user_name alphabetically.
+Display only rows that ip_address matches the pattern: “___.1%.%.___”.
+Submit your query statements as Prepare DB & run queries.
+*/
+
+SELECT user_name, ip_address FROM users
+WHERE ip_address LIKE '___.1%.%.___'
+ORDER BY user_name;
+

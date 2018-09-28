@@ -187,3 +187,14 @@ SELECT name, DATE_FORMAT(`start`,'%Y-%m-%d')
 FROM games
 WHERE YEAR(start) IN (2011,2012)
 LIMIT 50;
+
+/*
+13.	 User Email Providers
+Find all users along with information about their email providers. Display the user_name and email provider.
+Sort the results by email provider alphabetically, then by username.
+Submit your query statements as Prepare DB & run queries.
+*/
+
+SELECT user_name, SUBSTRING(email,locate('@',`email`)+1) AS `Email Provider`
+FROM users
+ORDER BY `Email Provider`, user_name;

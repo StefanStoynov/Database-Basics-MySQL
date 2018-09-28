@@ -169,9 +169,21 @@ letter of its corresponding river name. Display the peak names, river names, and
 by the obtained mix. Submit your query statements as Prepare DB & run queries.
 */
 
-use geography;
 SELECT peaks.peak_name, rivers.river_name,
     (LOWER(CONCAT(peak_name,SUBSTRING(rivers.river_name,2)))) AS mix
 FROM peaks, rivers
 WHERE RIGHT(peak_name,1) = LEFT(river_name,1)
 ORDER BY mix;
+
+/*
+12.	Games from 2011 and 2012 year
+Find the top 50 games ordered by start date, then by name of the game. Display only games from 2011 and 2012 year.
+Display start date in the format “YYYY-MM-DD”.
+Submit your query statements as Prepare DB & run queries.
+*/
+
+USE diablo;
+SELECT name, DATE_FORMAT(`start`,'%Y-%m-%d')
+FROM games
+WHERE YEAR(start) IN (2011,2012)
+LIMIT 50;

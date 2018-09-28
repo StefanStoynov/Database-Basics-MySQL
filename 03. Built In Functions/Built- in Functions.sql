@@ -132,3 +132,15 @@ Submit your query statements as Prepare DB & run queries.
 SELECT town_id, name FROM towns
 WHERE name REGEXP'^[^R|B|D]+'
 ORDER BY name;
+
+/*
+8.	Create View Employees Hired After 2000 Year
+Write a SQL query to create view v_employees_hired_after_2000 with first and last name to all employees 
+hired after 2000 year. Submit your query statements as Run skeleton, run queries & check DB.
+*/
+
+CREATE VIEW `v_employees_hired_after_2000`
+AS SELECT first_name, last_name FROM employees
+WHERE YEAR(hire_date) > 2000;
+
+

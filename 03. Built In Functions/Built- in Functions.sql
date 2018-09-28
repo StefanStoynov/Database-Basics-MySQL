@@ -161,3 +161,17 @@ Submit your query statements as Prepare DB & run queries.
 SELECT country_name, iso_code FROM countries
 WHERE country_name LIKE '%a%a%a%'
 ORDER BY iso_code;
+
+/*
+11.	 Mix of Peak and River Names
+Combine all peak names with all river names, so that the last letter of each peak name is the same like the first
+letter of its corresponding river name. Display the peak names, river names, and the obtained mix. Sort the results
+by the obtained mix. Submit your query statements as Prepare DB & run queries.
+*/
+
+use geography;
+SELECT peaks.peak_name, rivers.river_name,
+    (LOWER(CONCAT(peak_name,SUBSTRING(rivers.river_name,2)))) AS mix
+FROM peaks, rivers
+WHERE RIGHT(peak_name,1) = LEFT(river_name,1)
+ORDER BY mix;

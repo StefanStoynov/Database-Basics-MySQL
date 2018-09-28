@@ -150,3 +150,14 @@ Write a SQL query to find the names of all employees whose last name is exactly 
 
 SELECT first_name, last_name FROM employees
 WHERE char_length(`last_name`) = 5;
+
+/*
+10.	Countries Holding ‘A’ 3 or More Times
+Find all countries that holds the letter 'A' in their name at least 3 times (case insensitively), 
+sorted by ISO code. Display the country name and ISO code. 
+Submit your query statements as Prepare DB & run queries.
+*/
+
+SELECT country_name, iso_code FROM countries
+WHERE country_name LIKE '%a%a%a%'
+ORDER BY iso_code;

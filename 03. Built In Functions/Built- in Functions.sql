@@ -210,3 +210,26 @@ SELECT user_name, ip_address FROM users
 WHERE ip_address LIKE '___.1%.%.___'
 ORDER BY user_name;
 
+/*
+15.	 Show All Games with Duration and Part of the Day
+Find all games with part of the day and duration.
+Parts of the day should be Morning (start time is >= 0 and < 12), Afternoon (start time is >= 12 and < 18),
+Evening (start time is >= 18 and < 24). Duration should be Extra Short (smaller or equal to 3),
+Short (between 3 and 6 including), Long (between 6 and 10 including) and Extra Long in any other cases or without
+duration. Submit your query statements as Prepare DB & run queries.
+*/
+
+SELECT name, (case
+                WHEN HOUR(`start`)>=0 AND HOUR(`start`)<12 THEN 'Morning'
+                WHEN HOUR(`start`)>=12 AND HOUR(`start`)<18 THEN 'Afternoon'
+                WHEN HOUR(`start`)>=18 AND HOUR(`start`)<24 THEN 'Evening'
+                END
+    ) AS `Part of the Day`,
+            (case WHEN duration <= 3 THEN 'Extra Short'
+    WHEN duration BETWEEN 3 AND 6 THEN 'Short'
+    WHEN duration BETWEEN 6 AND 10 THEN 'Long'
+    ELSE 'Extra Long'
+    END
+    ) AS Duration
+FROM games;
+

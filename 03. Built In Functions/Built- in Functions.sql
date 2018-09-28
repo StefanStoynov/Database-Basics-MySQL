@@ -77,3 +77,15 @@ Submit your query statements as Prepare DB & run queries.
 SELECT first_name, last_name 
 FROM employees
 WHERE last_name LIKE '%ei%';
+
+/*
+3.	Find First Names of All Employees
+Write a SQL query to find the first names of all employees in the departments with ID 3 or 10 and whose 
+hire year is between 1995 and 2005 inclusive. Order the information by id. 
+Submit your query statements as Prepare DB & run queries.
+*/
+
+SELECT first_name FROM employees
+WHERE (department_id = 3 OR department_id = 10) 
+AND YEAR(hire_date) BETWEEN 1995 AND 2005
+ORDER BY employee_id;

@@ -99,3 +99,14 @@ Submit your query statements as Prepare DB & run queries.
 
 SELECT first_name, last_name FROM employees
 WHERE job_title NOT LIKE '%engineer%'; 
+
+/*
+5.	Find Towns with Name Length
+Write a SQL query to find town names that are 5 or 6 symbols long and order them alphabetically by 
+town name. 
+Submit your query statements as Prepare DB & run queries.
+*/
+
+SELECT name FROM towns
+WHERE char_length(name) BETWEEN 5 AND 6
+ORDER BY name;

@@ -52,3 +52,17 @@ Order the information by id. Submit your query statements as Prepare DB & run qu
 
 SELECT title FROM books
 WHERE title LIKE 'Harry Potter%';
+
+# Exercises: Built-in Functions
+
+/*
+1.	Find Names of All Employees by First Name
+Write a SQL query to find first and last names of all employees whose first name starts with “Sa” 
+(case insensitively). Order the information by id. 
+Submit your query statements as Prepare DB & run queries.
+*/
+
+SELECT first_name, last_name
+FROM employees
+WHERE LEFT(first_name, 2) = 'Sa'
+ORDER BY employee_id;

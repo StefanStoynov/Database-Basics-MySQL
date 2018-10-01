@@ -41,3 +41,23 @@ Submit your queries with the MySQL prepare DB & run queries strategy.
 
 SELECT count(category_id) AS `Appetizers cost > 8` FROM products
 WHERE  category_id = 2 AND price > 8;
+
+/*
+5.	 Menu Prices
+Write a query to retrieve information about the prices of each category. The output should consist of:
+•	Category_id
+•	Average Price
+•	Cheapest Product
+•	Most Expensive Product
+See the examples for more information. Round the results to 2 digits after the decimal point.
+Submit your queries with the MySQL prepare DB & run queries strategy.
+*/
+
+SELECT category_id,
+       round(avg(price),2) AS 'Average Price',
+       round(min(price),2) AS 'Cheapest Product',
+       round(max(price),2) AS 'Most Expensive Product'
+FROM products
+GROUP BY category_id;
+
+

@@ -60,4 +60,12 @@ SELECT category_id,
 FROM products
 GROUP BY category_id;
 
+# Exercises: Data Aggregation
 
+/*
+1. Records’ Count
+Import the database and send the total count of records to Mr. Bodrog. Make sure nothing got lost.
+*/
+
+SELECT count(id)AS `count`
+FROM wizzard_deposits;

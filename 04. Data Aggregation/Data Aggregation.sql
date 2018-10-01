@@ -32,3 +32,12 @@ Submit your queries with the MySQL prepare DB & run queries strategy.
 SELECT department_id,round(min(salary),2) AS `Min Salary` FROM employees
 GROUP BY department_id
 HAVING `Min Salary`>800;
+
+/*
+4.	 Appetizers Count
+Write a query to retrieve the count of all appetizers (category id = 2) with price higher than 8.
+Submit your queries with the MySQL prepare DB & run queries strategy.
+*/
+
+SELECT count(category_id) AS `Appetizers cost > 8` FROM products
+WHERE  category_id = 2 AND price > 8;

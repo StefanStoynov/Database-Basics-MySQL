@@ -69,3 +69,11 @@ Import the database and send the total count of records to Mr. Bodrog. Make sure
 
 SELECT count(id)AS `count`
 FROM wizzard_deposits;
+
+/*
+2.	 Longest Magic Wand
+Select the size of the longest magic wand. Rename the new column appropriately.
+*/
+
+SELECT max(magic_wand_size) AS `longest_magic_wand`
+FROM wizzard_deposits;

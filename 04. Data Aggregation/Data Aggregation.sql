@@ -271,6 +271,9 @@ ORDER BY department_id;
 Count the salaries of all employees who don’t have a manager.
 */
 
+SELECT count(employee_id) FROM employees
+WHERE manager_id IS NULL ;
+
 /*
 17.	3rd Highest Salary*
 Find the third highest salary in each department if there is such. Sort result by department_id in increasing order.

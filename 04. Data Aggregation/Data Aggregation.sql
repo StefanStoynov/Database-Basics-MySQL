@@ -132,6 +132,12 @@ After this, filter total deposit sums lower than 150000.
 Order by total deposit sum in descending order.
 */
 
+SELECT deposit_group, sum(deposit_amount) AS `sum` FROM wizzard_deposits
+WHERE magic_wand_creator = 'Ollivander family'
+GROUP BY deposit_group
+HAVING `sum`< 150000
+ORDER BY `sum` DESC ;
+
 /*
 8.	 Deposit charge
 Create a query that selects:

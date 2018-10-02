@@ -241,11 +241,26 @@ Finally, select the average salaries in each department from the new table. Sort
 increasing order.
 */
 
+CREATE TABLE high_paid_employees as SELECT * FROM employees WHERE salary > 30000;
+
+DELETE FROM high_paid_employees
+WHERE manager_id = 42;
+
+UPDATE high_paid_employees
+SET salary = salary + 5000
+WHERE department_id = 1;
+
+SELECT department_id, avg(salary) AS `avg_salary` FROM high_paid_employees
+GROUP BY department_id
+ORDER BY department_id;
+
 /*
 15. Employees Maximum Salaries
 Find the max salary for each department. Filter those which have max salaries not in the range 30000 and 70000.
 Sort result by department_id in increasing order.
 */
+
+
 
 /*
 16.	Employees Count Salaries

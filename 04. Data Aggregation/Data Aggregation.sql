@@ -106,12 +106,22 @@ LIMIT 1;
 Select all deposit groups and its total deposit sum. Sort result by total_sum in increasing order.
 */
 
+SELECT deposit_group, sum(deposit_amount) FROM wizzard_deposits
+GROUP BY deposit_group
+ORDER BY sum(deposit_amount);
+
+
 /*
 6.	 Deposits Sum for Ollivander family
 Select all deposit groups and its total deposit sum but only for the wizards who has their magic wand crafted
 by Ollivander family.
 Sort result by deposit_group alphabetically.
 */
+
+SELECT deposit_group, sum(deposit_amount) FROM wizzard_deposits
+WHERE magic_wand_creator = 'Ollivander'
+GROUP BY deposit_group;
+
 
 /*
 7.	Deposits Filter

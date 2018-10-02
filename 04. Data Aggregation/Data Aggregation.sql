@@ -203,6 +203,11 @@ But that’s not all. He wants you to select deposits with start date after 01/0
 Order the data descending by Deposit Group and ascending by Expiration Flag.
 */
 
+SELECT deposit_group, is_deposit_expired, avg(deposit_interest)FROM wizzard_deposits
+WHERE deposit_start_date > '1985-01-01'
+GROUP BY deposit_group, is_deposit_expired
+ORDER BY deposit_group DESC, is_deposit_expired;
+
 /*
 12.	Rich Wizard, Poor Wizard*
 Give Mr. Bodrog some data to play his favorite game Rich Wizard, Poor Wizard.
@@ -210,6 +215,7 @@ The rules are simple: You compare the deposits of every wizard with the wizard a
 If a wizard is the last one in the database, simply ignore it. At the end you have to sum the difference between the deposits.
 At the end your query should return a single value: the SUM of all differences.
 */
+
 
 /*
 13.	 Employees Minimum Salaries

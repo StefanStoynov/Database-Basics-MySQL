@@ -295,3 +295,7 @@ Create a query which shows the total sum of salaries for each department. Order 
 Your query should return:
 •	department_id
 */
+
+SELECT department_id, sum(salary)FROM employees
+GROUP BY department_id
+ORDER BY department_id;

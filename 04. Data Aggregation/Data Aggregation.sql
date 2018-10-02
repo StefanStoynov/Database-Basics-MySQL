@@ -254,13 +254,17 @@ SELECT department_id, avg(salary) AS `avg_salary` FROM high_paid_employees
 GROUP BY department_id
 ORDER BY department_id;
 
+DROP TABLE high_paid_employees;
 /*
 15. Employees Maximum Salaries
 Find the max salary for each department. Filter those which have max salaries not in the range 30000 and 70000.
 Sort result by department_id in increasing order.
 */
 
-
+SELECT department_id, max(salary) FROM employees
+GROUP BY department_id
+HAVING max(salary) NOT BETWEEN 30000 AND 70000
+ORDER BY department_id;
 
 /*
 16.	Employees Count Salaries

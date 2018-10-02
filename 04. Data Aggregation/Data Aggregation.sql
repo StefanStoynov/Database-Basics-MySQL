@@ -119,8 +119,9 @@ Sort result by deposit_group alphabetically.
 */
 
 SELECT deposit_group, sum(deposit_amount) FROM wizzard_deposits
-WHERE magic_wand_creator = 'Ollivander'
-GROUP BY deposit_group;
+WHERE magic_wand_creator = 'Ollivander family'
+GROUP BY deposit_group
+ORDER BY deposit_group;
 
 
 /*

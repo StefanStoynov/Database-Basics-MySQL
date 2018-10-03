@@ -216,6 +216,13 @@ If a wizard is the last one in the database, simply ignore it. At the end you ha
 At the end your query should return a single value: the SUM of all differences.
 */
 
+SELECT SUM(sums) AS sum_difference FROM
+	(SELECT (deposit_amount -
+					(SELECT deposit_amount FROM wizzard_deposits AS t2
+					WHERE t2.id = t1.id + 1)
+			) AS sums
+		FROM wizzard_deposits AS t1
+	) AS derived_table;
 
 /*
 13.	 Employees Minimum Salaries
@@ -279,6 +286,16 @@ WHERE manager_id IS NULL ;
 Find the third highest salary in each department if there is such. Sort result by department_id in increasing order.
 */
 
+SELECT department_id,
+(
+	SELECT DISTINCT salary FROM employees AS t2
+	WHERE t1.department_id = t2.department_id
+	ORDER BY salary DESC LIMIT 2, 1
+) AS third_highest_salary FROM employees AS t1
+GROUP BY department_id
+HAVING third_highest_salary IS NOT NULL
+ORDER BY department_id;
+
 /*
 18.	 Salary Challenge**
 Write a query that returns:
@@ -288,6 +305,12 @@ Write a query that returns:
 for all employees who have salary higher than the average salary of their respective departments.
 Select only the first 10 rows. Order by department_id.
 */
+
+SELECT first_name, last_name, department_id FROM employees AS t1
+WHERE salary > (SELECT AVG(salary) FROM employees AS t2
+				WHERE t1.department_id = t2.department_id)
+ORDER BY department_id, employee_id
+LIMIT 10;
 
 /*
 19.	Departments Total Salaries

@@ -52,13 +52,15 @@ CREATE TABLE books(
   ON DELETE CASCADE
 );
 
-
 /*
 3.	 Trip Organization
 Write a query to retrieve information about the SoftUni camp’s transportation organization.
 Get information about the people who drive(name and age) and their vehicle type.
 Submit your queries using the “MySQL prepare DB and Run Queries” strategy.
 */
+
+SELECT driver_id, vehicle_type, concat(first_name, ' ', last_name) AS 'driver_name' FROM vehicles
+JOIN campers ON driver_id =  campers.id;
 
 /*
 4.	 SoftUni Hiking

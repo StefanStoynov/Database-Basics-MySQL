@@ -27,16 +27,31 @@ CREATE TABLE peaks(
 
 /*
 2.	 Posts and Authors
-Write a query to create a one-to-many relationship between a table, holding information about books and other -about authors, so that when an author gets removed from the database all his books are deleted too. The tables should have:
+Write a query to create a one-to-many relationship between a table, holding information about books and other -about
+authors, so that when an author gets removed from the database all his books are deleted too. The tables should have:
 -	Books
 •	id
 •	name
 •	author_id
-•	Authors
+-	Authors
 •	id
 •	name
 Submit your queries using the “MySQL run queries & check DB” strategy.
 */
+
+CREATE TABLE authors(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(20)
+);
+
+CREATE TABLE books(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(50),
+  author_id INT,
+  CONSTRAINT fk_authors_id FOREIGN KEY (author_id) REFERENCES camp.authors(id)
+  ON DELETE CASCADE
+);
+
 
 /*
 3.	 Trip Organization

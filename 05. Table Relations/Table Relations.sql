@@ -106,3 +106,83 @@ CREATE TABLE projects (
 ALTER TABLE clients
     ADD FOREIGN KEY (project_id) REFERENCES projects(id);
 
+#Exercises: Table Relations
+
+/*
+1.	One-To-One Relationship
+Create two tables as follows. Use appropriate data types.
+Insert the data from the example above.
+•	Alter table persons and make person_id a primary key.
+•	Create a foreign key between persons and passports by using passport_id column.
+•	Think about which passport field should be UNIQUE
+Submit your queries by using “MySQL run queries & check DB” strategy.
+*/
+
+CREATE TABLE passports(
+  passport_id INT PRIMARY KEY UNIQUE,
+  passport_number VARCHAR(30)
+);
+
+CREATE TABLE persons(
+  person_id INT AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(20),
+  salary DECIMAL(7,2),
+  passport_id INT UNIQUE
+);
+
+ALTER TABLE persons
+    ADD CONSTRAINT fk_persons_passports FOREIGN KEY (passport_id) REFERENCES passports(passport_id);
+
+INSERT INTO passports(passport_id, passport_number) VALUES (101,'N34FG21B'),(102,'K65LO4R7'),(103,'ZE657QP2');
+INSERT INTO persons(first_name, salary, passport_id) VALUES ('Roberto',43300.00,102),('Tom',56100.00,103),('Yana',60200.00,101);
+/*
+2.	One-To-Many Relationship
+Create two tables as follows. Use appropriate data types.
+Insert the data from the example above. Add primary and foreign keys.
+Submit your queries by using “MySQL run queries & check DB” strategy.
+*/
+
+/*
+3.	Many-To-Many Relationship
+Create three tables as follows. Use appropriate data types.
+Insert the data from the example above.
+Add primary keys and foreign keys. Have in mind that table student_exams should have a composite primary key.
+Submit your queries by using “MySQL run queries & check DB” strategy.
+*/
+
+/*
+4.	Self-Referencing
+Create a single table as follows. Use appropriate data types.
+Insert the data from the example above. Add primary keys and foreign keys. The foreign key should be between manager_id
+and teacher_id.
+Submit your queries by using “	MySQL run queries & check DB” strategy.
+*/
+
+/*
+5.	Online Store Database
+*/
+
+/*
+6.	University Database
+*/
+
+/*
+7.	SoftUni Design
+Create an E/R Diagram of the SoftUni Database. There are some special relations you should check out:
+employees are self-referenced (manager_id) and departments have One-to-One with the employees (manager_id) while
+the employees have One-to-Many (department_id). You might find it interesting how it looks on the diagram. 
+*/
+
+/*
+8.	Geography Design
+Create an E/R Diagram of the Geography Database.
+*/
+
+/*
+9.	Peaks in Rila
+Display all peaks for "Rila" mountain_range. Include:
+•	mountain_range
+•	peak_name
+•	peak_elevation
+Peaks should be sorted by peak_elevation descending.
+*/

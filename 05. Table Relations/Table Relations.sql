@@ -133,14 +133,50 @@ CREATE TABLE persons(
 ALTER TABLE persons
     ADD CONSTRAINT fk_persons_passports FOREIGN KEY (passport_id) REFERENCES passports(passport_id);
 
-INSERT INTO passports(passport_id, passport_number) VALUES (101,'N34FG21B'),(102,'K65LO4R7'),(103,'ZE657QP2');
-INSERT INTO persons(first_name, salary, passport_id) VALUES ('Roberto',43300.00,102),('Tom',56100.00,103),('Yana',60200.00,101);
+INSERT INTO passports(passport_id, passport_number) VALUES
+                                                           (101,'N34FG21B'),
+                                                           (102,'K65LO4R7'),
+                                                           (103,'ZE657QP2');
+INSERT INTO persons(first_name, salary, passport_id) VALUES
+                                                            ('Roberto',43300.00,102),
+                                                            ('Tom',56100.00,103),
+                                                            ('Yana',60200.00,101);
+
 /*
 2.	One-To-Many Relationship
 Create two tables as follows. Use appropriate data types.
 Insert the data from the example above. Add primary and foreign keys.
 Submit your queries by using “MySQL run queries & check DB” strategy.
 */
+
+CREATE TABLE manufacturers(
+  manufacturer_id INT PRIMARY KEY ,
+  name VARCHAR(20) NOT NULL ,
+  established_on DATE
+);
+
+CREATE TABLE models(
+  model_id INT PRIMARY KEY,
+  name VARCHAR(20) NOT NULL,
+  manufacturer_id INT
+);
+
+INSERT INTO manufacturers
+VALUES (1,'BMW', '1916-03-01'),
+       (2,'Tesla', '2003-01-01'),
+       (3,'Lada', '1966-05-01');
+
+INSERT INTO models
+VALUES (101, 'X1', 1),
+(102, 'i6', 1),
+(103, 'Model S', 2),
+(104, 'Model X', 2),
+(105, 'Model 3', 2),
+(106, 'Nova', 3);
+
+ALTER TABLE models
+ADD CONSTRAINT fk_models_manufacturers FOREIGN KEY (manufacturer_id)
+REFERENCES manufacturers(manufacturer_id);
 
 /*
 3.	Many-To-Many Relationship
@@ -149,6 +185,8 @@ Insert the data from the example above.
 Add primary keys and foreign keys. Have in mind that table student_exams should have a composite primary key.
 Submit your queries by using “MySQL run queries & check DB” strategy.
 */
+
+
 
 /*
 4.	Self-Referencing

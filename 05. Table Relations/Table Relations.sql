@@ -345,3 +345,9 @@ Display all peaks for "Rila" mountain_range. Include:
 •	peak_elevation
 Peaks should be sorted by peak_elevation descending.
 */
+
+SELECT mountain_range, peak_name, elevation as `peak_elevation`
+FROM mountains
+JOIN peaks ON mountains.id = peaks.mountain_id
+WHERE mountain_id = 17
+ORDER BY `peak_elevation` DESC ;

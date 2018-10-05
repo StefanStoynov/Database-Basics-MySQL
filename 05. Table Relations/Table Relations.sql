@@ -287,6 +287,44 @@ CREATE TABLE order_items(
 6.	University Database
 */
 
+CREATE TABLE students(
+  student_id INT PRIMARY KEY NOT NULL ,
+  student_number VARCHAR(12) NOT NULL,
+  student_name VARCHAR(50) NOT NULL ,
+  major_id INT NOT NULL
+);
+
+CREATE TABLE majors(
+  major_id INT PRIMARY KEY NOT NULL ,
+  name VARCHAR(50) NOT NULL
+);
+
+ALTER TABLE students
+     ADD CONSTRAINT fk_students_majors FOREIGN KEY (major_id) REFERENCES majors(major_id);
+
+CREATE TABLE payments(
+  payment_id INT PRIMARY KEY NOT NULL,
+  payment_date DATE NOT NULL ,
+  payment_amount DECIMAL(8,2) NOT NULL ,
+  student_id INT NOT NULL
+);
+
+ALTER TABLE payments
+    ADD CONSTRAINT fk_payments_students FOREIGN KEY (student_id) REFERENCES students(student_id);
+
+CREATE TABLE subjects(
+  subject_id INT PRIMARY KEY NOT NULL,
+  subject_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE agenda(
+  student_id INT NOT NULL,
+  subject_id INT NOT NULL,
+  CONSTRAINT pk_student_subject PRIMARY KEY (student_id,subject_id),
+  CONSTRAINT fk_agende_students FOREIGN KEY (student_id) REFERENCES students(student_id),
+  CONSTRAINT fk_agenda_subjects FOREIGN KEY (subject_id) REFERENCES subjects(subject_id)
+);
+
 /*
 7.	SoftUni Design
 Create an E/R Diagram of the SoftUni Database. There are some special relations you should check out:

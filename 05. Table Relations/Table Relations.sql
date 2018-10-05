@@ -69,8 +69,8 @@ Get information about the hiking routes and their leaders – name and id.
 Submit your queries using the “MySQL prepare DB and Run Queries” strategy.
 */
 
-SELECT starting_point                     AS 'route_starting_point',
-       end_point                          AS 'route_ending_point',
+SELECT starting_point AS 'route_starting_point',
+       end_point AS 'route_ending_point',
        leader_id,
        concat(first_name, ' ', last_name) AS 'leader_name'
 FROM routes
@@ -150,16 +150,20 @@ Submit your queries by using “MySQL run queries & check DB” strategy.
 */
 
 CREATE TABLE manufacturers(
-  manufacturer_id INT PRIMARY KEY ,
+  manufacturer_id INT PRIMARY KEY NOT NULL ,
   name VARCHAR(20) NOT NULL ,
-  established_on DATE
+  established_on DATE NOT NULL
 );
 
 CREATE TABLE models(
-  model_id INT PRIMARY KEY,
+  model_id INT PRIMARY KEY NOT NULL ,
   name VARCHAR(20) NOT NULL,
-  manufacturer_id INT
+  manufacturer_id INT NOT NULL
 );
+
+ALTER TABLE models
+ADD CONSTRAINT fk_models_manufacturers FOREIGN KEY (manufacturer_id)
+REFERENCES manufacturers(manufacturer_id);
 
 INSERT INTO manufacturers
 VALUES (1,'BMW', '1916-03-01'),
@@ -173,10 +177,6 @@ VALUES (101, 'X1', 1),
 (104, 'Model X', 2),
 (105, 'Model 3', 2),
 (106, 'Nova', 3);
-
-ALTER TABLE models
-ADD CONSTRAINT fk_models_manufacturers FOREIGN KEY (manufacturer_id)
-REFERENCES manufacturers(manufacturer_id);
 
 /*
 3.	Many-To-Many Relationship
@@ -221,6 +221,20 @@ Insert the data from the example above. Add primary keys and foreign keys. The f
 and teacher_id.
 Submit your queries by using “	MySQL run queries & check DB” strategy.
 */
+
+CREATE TABLE teachers(
+  teacher_id INT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL ,
+  manager_id INT
+);
+
+INSERT INTO teachers
+VALUES (101,'John', NULL ),(102,'Maya', 106),
+ (103,'Silvia', 106 ),(104,'Ted', 105),
+  (105,'Mark', 101 ),(106,'Greta', 101);
+
+ALTER TABLE teachers
+    ADD CONSTRAINT fk_teachers_managers FOREIGN KEY (manager_id) REFERENCES teachers(teacher_id);
 
 /*
 5.	Online Store Database

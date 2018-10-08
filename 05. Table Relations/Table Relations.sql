@@ -249,7 +249,7 @@ CREATE TABLE customers(
 
 CREATE TABLE cities(
   city_id INT PRIMARY KEY,
-  name VARCHAR(50)
+  name VARCHAR(50) NOT NULL
 );
 
 ALTER TABLE customers

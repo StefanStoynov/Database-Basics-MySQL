@@ -44,6 +44,10 @@ Write a query to count the number of employees who receive salary higher than th
 Submit your queries using the “MySQL prepare DB and Run Queries” strategy.
 */
 
+SELECT count(employee_id)
+FROM employees AS e
+WHERE e.salary > (SELECT avg(salary) FROM employees);
+
 #Exercises: Subqueries and JOINs
 
 /*1.	Employee Address

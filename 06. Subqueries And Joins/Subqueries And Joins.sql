@@ -187,6 +187,12 @@ Write a query that selects:
 Filter all employees with a manager who has id equals to 3 or 7. Return the all rows sorted by employee first_name in ascending order.
 */
 
+SELECT e.employee_id, e.first_name, e.manager_id, es.first_name
+FROM employees e
+JOIN employees es ON e.manager_id = es.employee_id
+WHERE e.manager_id = 3 OR e.manager_id = 7
+ORDER BY e.first_name;
+
 /*10.	Employee Summary
 Write a query that selects:
 •	employee_id

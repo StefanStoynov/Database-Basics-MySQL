@@ -122,8 +122,7 @@ Filter only employees without a project. Return the first 3 rows sorted by emplo
 SELECT e.employee_id, e.first_name
 FROM employees e
 LEFT JOIN employees_projects e_p ON e.employee_id = e_p.employee_id
-LEFT JOIN projects p ON p.project_id = e_p.project_id
-WHERE p.project_id IS NULL
+WHERE e_p.project_id IS NULL
 ORDER BY e.employee_id DESC
 LIMIT 3;
 
@@ -148,10 +147,17 @@ Write a query that selects:
 •	employee_id
 •	first_name
 •	project_name
-Filter only employees with a project which has started after 13.08.2002 and it is still ongoing (no end date). Return the first 5 rows sorted by first_name then by project_name both  in ascending order.
+Filter only employees with a project which has started after 13.08.2002 and it is still ongoing (no end date).
+Return the first 5 rows sorted by first_name then by project_name both  in ascending order.
 */
 
-
+SELECT e.employee_id, e.first_name, p.name
+FROM employees e
+RIGHT JOIN employees_projects e_p ON e.employee_id = e_p.employee_id
+JOIN projects p ON e_p.project_id = p.project_id
+WHERE p.start_date >= '2002-08-14' AND p.end_date IS NULL
+ORDER BY e.first_name, p.name
+LIMIT 5;
 
 /*8.	Employee 24
 Write a query that selects:

@@ -217,6 +217,12 @@ LIMIT 5;
 Write a query that return the value of the lowest average salary of all departments.
 */
 
+SELECT MIN(av_sal)
+FROM (SELECT avg(e.salary) `av_sal`
+         FROM employees e
+         GROUP BY department_id)
+AS `min_average_salary`;
+
 /*12.	Highest Peaks in Bulgaria
 Write a query that selects:
 •	country_code
@@ -225,6 +231,8 @@ Write a query that selects:
 •	elevation
 Filter all peaks in Bulgaria with elevation over 2835. Return the all rows sorted by elevation in descending order.
 */
+
+
 
 /*13.	Count Mountain Ranges
 Write a query that selects:

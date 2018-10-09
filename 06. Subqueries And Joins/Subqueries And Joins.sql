@@ -90,6 +90,12 @@ Write a query that selects:
 Sorted by employee_id in descending order. Select only employees from “Sales” department.
 */
 
+SELECT e.employee_id,e.first_name,e.last_name, d.name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+WHERE d.name = 'Sales'
+ORDER BY e.employee_id DESC;
+
 /*4.	Employee Departments
 Write a query that selects:
 •	employee_id

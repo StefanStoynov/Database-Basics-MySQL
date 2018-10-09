@@ -199,8 +199,19 @@ Write a query that selects:
 •	employee_name
 •	manager_name
 •	department_name
-Show first 5 employees (only for employees who has a manager) with their managers and the departments which they are in (show the departments of the employees). Order by employee_id.
+Show first 5 employees (only for employees who has a manager) with their managers and the departments which they are in
+(show the departments of the employees). Order by employee_id.
 */
+
+SELECT e.employee_id,
+       concat(e.first_name,' ',e.last_name) AS `employee_name`,
+       concat(e1.first_name,' ',e1.last_name)AS `manager_name`,
+       d.name
+FROM employees e
+RIGHT JOIN employees e1 ON e.manager_id = e1.employee_id
+JOIN departments d ON e.department_id = d.department_id
+ORDER BY e.employee_id
+LIMIT 5;
 
 /*11.	Min Average Salary
 Write a query that return the value of the lowest average salary of all departments.

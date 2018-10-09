@@ -133,8 +133,15 @@ Write a query that selects:
 •	last_name
 •	hire_date
 •	dept_name
-Filter only employees with hired after 1/1/1999 and are from either "Sales" or "Finance" departments. Sorted by hire_date (ascending).
+Filter only employees with hired after 1/1/1999 and are from either "Sales" or "Finance" departments.
+Sorted by hire_date (ascending).
 */
+
+SELECT e.first_name, e.last_name, e.hire_date, d.name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+WHERE e.hire_date >= '1999-01-02' AND d.name IN ('Sales','Finance')
+ORDER BY e.hire_date;
 
 /*7.	Employees with Project
 Write a query that selects:
@@ -143,6 +150,8 @@ Write a query that selects:
 •	project_name
 Filter only employees with a project which has started after 13.08.2002 and it is still ongoing (no end date). Return the first 5 rows sorted by first_name then by project_name both  in ascending order.
 */
+
+
 
 /*8.	Employee 24
 Write a query that selects:

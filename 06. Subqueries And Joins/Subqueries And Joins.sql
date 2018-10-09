@@ -164,8 +164,19 @@ Write a query that selects:
 •	employee_id
 •	first_name
 •	project_name
-Filter all the projects of employees with id 24. If the project has started after 2005 inclusively the return value should be NULL. Sort result by project_name alphabetically.
+Filter all the projects of employees with id 24.
+If the project has started after 2005 inclusively the return value should be NULL.
+Sort result by project_name alphabetically.
 */
+
+SELECT e.employee_id, e.first_name, (CASE WHEN p.start_date >= '2005-01-01' THEN NULL
+    ELSE p.name
+    END )as `project_name`
+FROM employees e
+JOIN employees_projects e_p ON e.employee_id = e_p.employee_id
+JOIN projects p ON e_p.project_id = p.project_id
+WHERE e.employee_id = 24
+ORDER BY p.name;
 
 /*9.	Employee Manager
 Write a query that selects:

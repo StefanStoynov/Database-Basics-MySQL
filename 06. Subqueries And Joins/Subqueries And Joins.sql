@@ -59,6 +59,12 @@ Write a query that selects:
 Return the first 5 rows sorted by address_id in ascending order.
 */
 
+SELECT e.employee_id,e.job_title,a.address_id,a.address_text
+FROM employees e
+JOIN addresses a ON e.address_id = a.address_id
+ORDER BY a.address_id
+LIMIT 5;
+
 /*2.	Addresses with Towns
 Write a query that selects:
 •	first_name

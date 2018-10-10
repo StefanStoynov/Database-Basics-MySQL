@@ -239,13 +239,20 @@ JOIN peaks p ON p.mountain_id = m.id
 WHERE c.country_code = 'BG' AND p.elevation > 2835
 ORDER BY p.elevation DESC;
 
-
 /*13.	Count Mountain Ranges
 Write a query that selects:
 •	country_code
 •	mountain_range
-Filter the count of the mountain ranges in the United States, Russia and Bulgaria. Sort result by mountain_range count  in decreasing order.
+Filter the count of the mountain ranges in the United States, Russia and Bulgaria.
+Sort result by mountain_range count  in decreasing order.
 */
+
+SELECT c.country_code, count(m.mountain_range) FROM countries c
+JOIN mountains_countries m_c ON m_c.country_code = c.country_code
+JOIN mountains m ON m.id = m_c.mountain_id
+WHERE c.country_code = 'BG' or c.country_code = 'RU' or c.country_code ='US'
+GROUP BY c.country_code
+ORDER BY count(m.mountain_range) DESC ;
 
 /*14.	Countries with Rivers
 Write a query that selects:

@@ -261,6 +261,14 @@ Write a query that selects:
 Find the first 5 countries with or without rivers in Africa. Sort them by country_name in ascending order.
 */
 
+SELECT c.country_name, r.river_name
+FROM countries c
+left JOIN countries_rivers c_r ON c.country_code = c_r.country_code
+left JOIN rivers r ON r.id = c_r.river_id
+WHERE c.continent_code = 'AF'
+ORDER BY country_name
+LIMIT 5;
+
 /*15.	*Continents and Currencies
 Write a query that selects:
 •	continent_code

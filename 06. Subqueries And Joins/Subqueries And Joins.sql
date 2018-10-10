@@ -281,6 +281,13 @@ Find all continents and their most used currency. Filter any currency that is us
 Find all the count of all countries which don’t have a mountain.
 */
 
+SELECT count(countryes)
+FROM(SELECT c.country_code `countryes`
+     FROM countries c
+     LEFT JOIN mountains_countries m_c ON m_c.country_code = c.country_code
+     WHERE m_c.mountain_id IS NULL)
+AS `country_count`;
+
 /*17.	Highest Peak and Longest River by Country
 For each country, find the elevation of the highest peak and the length of the longest river, sorted by the highest peak_elevation (from highest to lowest), then by the longest river_length (from longest to smallest), then by country_name (alphabetically). Display NULL when no data is available in some of the columns. Limit only the first 5 rows.
 */

@@ -232,6 +232,12 @@ Write a query that selects:
 Filter all peaks in Bulgaria with elevation over 2835. Return the all rows sorted by elevation in descending order.
 */
 
+SELECT c.country_code, m.mountain_range, p.peak_name, p.elevation FROM countries c
+JOIN mountains_countries m_c ON c.country_code = m_c.country_code
+JOIN mountains m ON m.id = m_c.mountain_id
+JOIN peaks p ON p.mountain_id = m.id
+WHERE c.country_code = 'BG' AND p.elevation > 2835
+ORDER BY p.elevation DESC;
 
 
 /*13.	Count Mountain Ranges

@@ -289,6 +289,25 @@ FROM(SELECT c.country_code `countryes`
 AS `country_count`;
 
 /*17.	Highest Peak and Longest River by Country
-For each country, find the elevation of the highest peak and the length of the longest river, sorted by the highest peak_elevation (from highest to lowest), then by the longest river_length (from longest to smallest), then by country_name (alphabetically). Display NULL when no data is available in some of the columns. Limit only the first 5 rows.
+For each country, find the elevation of the highest peak and the length of the longest river,
+sorted by the highest peak_elevation (from highest to lowest), then by the longest river_length
+(from longest to smallest), then by country_name (alphabetically).
+Display NULL when no data is available in some of the columns. Limit only the first 5 rows.
 */
+
+SELECT c.country_name,
+       max(p.elevation) AS `highest_peak_elevation`,
+       max(r.length) AS `longest_river_length`
+FROM countries c
+JOIN countries_rivers c_r ON c.country_code = c_r.country_code
+JOIN rivers r ON r.id = c_r.river_id
+
+
+JOIN mountains_countries m_c ON c.country_code = m_c.country_code
+JOIN mountains m ON m.id = m_c.mountain_id
+JOIN peaks p ON m.id = p.mountain_id
+
+GROUP BY country_name
+ORDER BY highest_peak_elevation DESC , longest_river_length DESC ,c.country_name
+LIMIT 5;
 

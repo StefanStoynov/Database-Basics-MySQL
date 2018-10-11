@@ -25,6 +25,16 @@ Write a stored procedure usp_raise_salaries(department_name) to raise the salary
 department as parameter by 5%. Submit your queries using the “MySQL Run Skeleton, run queries and check DB” strategy.
 */
 
+DELIMITER $$
+
+CREATE PROCEDURE usp_raise_salaries(department_name VARCHAR(50))
+  BEGIN UPDATE employees
+  SET salary = salary * 1.05
+    WHERE department_id = (SELECT department_id FROM departments
+                          WHERE name = department_name);
+    END $$
+
+CALL usp_raise_salaries('Finance');
 /*3.	Employees Promotion By ID
 Write a stored procedure usp_raise_salary_by_id(id) that raises a given employee’s salary (by id as parameter) by 5%.
 Consider that you cannot promote an employee that doesn’t exist – if that happens, no changes to the database should

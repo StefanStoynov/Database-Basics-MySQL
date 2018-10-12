@@ -183,6 +183,7 @@ depending on that if the word is a comprised of the given set of letters.
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
 
+
 /*8.	Find Full Name
 You are given a database schema with tables:
 •	account_holders(id (PK), first_name, last_name, ssn)
@@ -191,6 +192,13 @@ and
 Write a stored procedure usp_get_holders_full_name that selects the full names of all people. . The result should be
 sorted by full_name alphabetically and id ascending. Submit your query statement as Run skeleton, run queries & check DB in Judge
 */
+
+CREATE PROCEDURE usp_get_holders_full_name()
+  BEGIN
+    SELECT concat(first_name,' ', last_name) as `full_name` FROM account_holders
+        ORDER BY full_name;
+  END $$
+
 
 /*9.	People with Balance Higher Than
 Your task is to create a stored procedure usp_get_holders_with_balance_higher_than that accepts a number as a parameter

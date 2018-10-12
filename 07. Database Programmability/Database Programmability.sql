@@ -18,7 +18,7 @@ CREATE FUNCTION
     RETURN e_count;
   END$$
 
-CALL ufn_count_employees_by_town('Sofia');
+SELECT ufn_count_employees_by_town('Sofia');
 
 /*2.	Employees Promotion
 Write a stored procedure usp_raise_salaries(department_name) to raise the salary of all employees in given
@@ -35,11 +35,20 @@ CREATE PROCEDURE usp_raise_salaries(department_name VARCHAR(50))
     END $$
 
 CALL usp_raise_salaries('Finance');
+
 /*3.	Employees Promotion By ID
 Write a stored procedure usp_raise_salary_by_id(id) that raises a given employee’s salary (by id as parameter) by 5%.
 Consider that you cannot promote an employee that doesn’t exist – if that happens, no changes to the database should
 be made. Submit your queries using the “MySQL Run Skeleton, run queries and check DB” strategy.
 */
+
+DELIMITER $$
+CREATE PROCEDURE usp_raise_salary_by_id(id INT)
+  BEGIN
+    UPDATE employees e
+    SET e.salary = e.salary * 1.05
+    WHERE e.employee_id = id;
+  END $$
 
 /*4.	Triggered
 Create a table deleted_employees(employee_id PK, first_name,last_name,middle_name,job_title,deparment_id,salary)

@@ -115,6 +115,15 @@ starting with that string. The result should be sorted by town_name alphabetical
 Run skeleton, run queries & check DB in Judge.
 */
 
+CREATE PROCEDURE usp_get_towns_starting_with (string VARCHAR(10))
+  BEGIN
+    SELECT t.name FROM towns t
+        WHERE left(t.name,char_length(string))= string
+    ORDER BY t.name;
+  END $$
+
+CALL usp_get_towns_starting_with('s');
+
 /*4.	Employees from Town
 Write a stored procedure usp_get_employees_from_town that accepts town_name as parameter and return the employees’
 first and last name that live in the given town. The result should be sorted by first_name then by last_name

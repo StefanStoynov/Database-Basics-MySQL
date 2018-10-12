@@ -151,7 +151,7 @@ CREATE FUNCTION ufn_get_salary_level(salary_amount DOUBLE)
   RETURNS VARCHAR(10)
   BEGIN
     DECLARE result VARCHAR(10);
-    SET result:= CASE WHEN salary_amount< 30000 THEN 'Low'
+    SET result:= CASE WHEN salary_amount < 30000 THEN 'Low'
       WHEN salary_amount BETWEEN 30000 AND 50000 THEN 'Average'
       ELSE 'High'
         END;
@@ -166,6 +166,16 @@ Write a stored procedure usp_get_employees_by_salary_level that receive as param
 The result should be sorted by first_name then by last_name both in descending order.
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
+
+
+CREATE PROCEDURE usp_get_employees_by_salary_level(level_salary VARCHAR(10))
+  BEGIN
+    SELECT e.first_name, e.last_name FROM  employees e
+        WHERE ufn_get_salary_level(e.salary) = level_salary
+    ORDER BY first_name DESC ,last_name DESC;
+  END $$
+
+CALL usp_get_employees_by_salary_level('low');
 
 /*7.	Define Function
 Define a function ufn_is_word_comprised(set_of_letters varchar(50), word varchar(50))  that returns true or false

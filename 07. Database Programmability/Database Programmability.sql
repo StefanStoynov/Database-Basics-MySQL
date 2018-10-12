@@ -130,6 +130,15 @@ first and last name that live in the given town. The result should be sorted by 
 alphabetically and id ascending. Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
 
+CREATE PROCEDURE usp_get_employees_from_town (town_name VARCHAR(50))
+  BEGIN
+    SELECT e.first_name, e.last_name FROM employees e
+    JOIN addresses a ON e.address_id = a.address_id
+    JOIN towns t ON t.town_id = a.town_id
+    WHERE t.name = town_name
+    ORDER BY e.first_name,e.last_name,e.employee_id;
+  END $$
+
 /*5.	Salary Level Function
 Write a function ufn_get_salary_level that receives salary of an employee and returns the level of the salary.
 •	If salary is < 30000 return “Low”

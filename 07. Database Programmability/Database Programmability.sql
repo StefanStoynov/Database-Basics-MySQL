@@ -84,6 +84,16 @@ whose salary is above 35000. The result should be sorted by first_name then by l
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
 
+DELIMITER $$
+CREATE PROCEDURE usp_get_employees_salary_above_35000()
+  BEGIN
+    SELECT e.first_name, e.last_name FROM employees e
+        WHERE e.salary > 35000
+    ORDER BY e.first_name,e.last_name,e.employee_id;
+  END $$
+
+CALL usp_get_employees_salary_above_35000();
+
 /*2.	Employees with Salary Above Number
 Create stored procedure usp_get_employees_salary_above that accept a number as parameter and return all employees’
 first and last names whose salary is above or equal to the given number. The result should be sorted by first_name

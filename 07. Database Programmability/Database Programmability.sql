@@ -147,6 +147,19 @@ Write a function ufn_get_salary_level that receives salary of an employee and re
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
 
+CREATE FUNCTION ufn_get_salary_level(salary_amount DOUBLE)
+  RETURNS VARCHAR(10)
+  BEGIN
+    DECLARE result VARCHAR(10);
+    SET result:= CASE WHEN salary_amount< 30000 THEN 'Low'
+      WHEN salary_amount BETWEEN 30000 AND 50000 THEN 'Average'
+      ELSE 'High'
+        END;
+      RETURN result;
+  END $$
+
+SELECT ufn_get_salary_level(20);
+
 /*6.	Employees by Salary Level
 Write a stored procedure usp_get_employees_by_salary_level that receive as parameter level of salary
 (low, average or high) and print the names of all employees that have given level of salary.

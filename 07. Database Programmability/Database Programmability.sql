@@ -238,17 +238,14 @@ Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
 
 CREATE PROCEDURE usp_get_holders_with_balance_higher_than(number DOUBLE)
-  BEGIN
-    SELECT first_name, last_name FROM account_holders a_c
-    JOIN accounts a ON a_c.id = a.account_holder_id
-        WHERE (SELECT sum(balance)
-        FROM account_holders
-        JOIN accounts a ON account_holders.id = a.account_holder_id
-        WHERE balance > number
-        GROUP BY first_name);
-  END $$
+BEGIN
+  SELECT a_c.first_name, a_c.last_name FROM account_holders a_c
+  JOIN accounts a ON a_c.id = a.account_holder_id
+  GROUP BY a_c.id HAVING sum(a.balance)> number
+  ORDER BY a.id, a_c.first_name, a_c.last_name;
+END $$
 
-CALL usp_get_holders_with_balance_higher_than(20);
+CALL usp_get_holders_with_balance_higher_than(7000);
 
 /*	Future Value Function
 Your task is to create a function ufn_calculate_future_value that accepts as parameters – sum,

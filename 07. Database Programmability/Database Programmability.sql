@@ -247,7 +247,7 @@ END $$
 
 CALL usp_get_holders_with_balance_higher_than(7000);
 
-/*	Future Value Function
+/*10. Future Value Function
 Your task is to create a function ufn_calculate_future_value that accepts as parameters – sum,
 yearly interest rate and number of years. It should calculate and return the future value of the initial sum.
 Using the following formula:
@@ -257,6 +257,17 @@ FV=I×(〖(1+R)〗^T)
 	T – Number of years
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
+
+CREATE FUNCTION ufn_calculate_future_value(initial_sum DOUBLE, interest_rate DOUBLE, number_of_years DOUBLE)
+  RETURNS DOUBLE
+  BEGIN
+    DECLARE result DOUBLE;
+    SET result := initial_sum * (pow((1+interest_rate),number_of_years));
+    RETURN result;
+  END $$
+
+SELECT ufn_calculate_future_value(1000,10,5);
+
 
 /*11.	Calculating Interest
 Your task is to create a stored procedure usp_calculate_future_value_for_account that uses the function from the

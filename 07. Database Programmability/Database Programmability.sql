@@ -258,16 +258,15 @@ FV=I×(〖(1+R)〗^T)
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
 
-CREATE FUNCTION ufn_calculate_future_value(initial_sum DOUBLE, interest_rate DOUBLE, number_of_years DOUBLE)
-  RETURNS DOUBLE
+CREATE FUNCTION ufn_calculate_future_value(initial_sum DECIMAL(20,4), interest_rate DECIMAL(20,4), number_of_years int)
+  RETURNS DECIMAL(20,4)
   BEGIN
-    DECLARE result DOUBLE;
-    SET result := initial_sum * (pow((1+interest_rate),number_of_years));
+    DECLARE result DECIMAL(20,4);
+    SET result := initial_sum * ( pow((1+interest_rate) ,number_of_years));
     RETURN result;
   END $$
 
-SELECT ufn_calculate_future_value(1000,10,5);
-
+SELECT ufn_calculate_future_value(123.1200,0.1,5);
 
 /*11.	Calculating Interest
 Your task is to create a stored procedure usp_calculate_future_value_for_account that uses the function from the
@@ -277,6 +276,17 @@ and the interest_rate as parameters. Interest rate should have precision up to 0
 after 5 years. Be extremely careful to achieve the desired precision!
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
+
+CREATE PROCEDURE usp_calculate_future_value_for_account(account_id INT, interest_rate DECIMAL(20,4))
+  BEGIN
+    SELECT a.id, h.first_name, h.last_name, a.balance AS 'current_balance',
+    ufn_calculate_future_value(a.balance,interest_rate,5) AS 'balance_in_5_years'
+    FROM accounts a
+    JOIN account_holders h ON h.id = a.account_holder_id
+    WHERE a.id = account_id;
+  END $$
+
+CALL usp_calculate_future_value_for_account(1,0.1);
 
 /*12.	Deposit Money
 Add stored procedure usp_deposit_money(account_id, money_amount) that operate in transactions.

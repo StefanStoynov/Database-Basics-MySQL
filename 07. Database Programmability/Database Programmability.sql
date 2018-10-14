@@ -205,6 +205,16 @@ CREATE FUNCTION ufn_is_word_comprised(set_of_letters varchar(50), word varchar(5
     RETURN result;
   END $$
 
+/*
+CREATE FUNCTION ufn_is_word_comprised(set_of_letters varchar(50), word varchar(50))
+  RETURNS BIT
+  BEGIN
+    RETURN word REGEXP (concat('^[', set_of_letters, ']+$'));
+  END;
+
+  solution of 7th task with regex
+*/
+
 /*8.	Find Full Name
 You are given a database schema with tables:
 •	account_holders(id (PK), first_name, last_name, ssn)

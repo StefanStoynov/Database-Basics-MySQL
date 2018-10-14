@@ -183,6 +183,27 @@ depending on that if the word is a comprised of the given set of letters.
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
 
+CREATE FUNCTION ufn_is_word_comprised(set_of_letters varchar(50), word varchar(50))
+  RETURNS BIT
+  BEGIN
+    DECLARE result BIT;
+    DECLARE current_index INT;
+    DECLARE rotations INT;
+
+    SET result := 1;
+    SET current_index :=1;
+    SET rotations := char_length(word);
+
+    WHILE (current_index <= rotations)DO
+        IF (set_of_letters NOT LIKE (concat('%',substring(word,current_index,1),'%')))
+        THEN SET result := 0;
+        END IF ;
+
+      SET current_index := current_index + 1;
+      END WHILE;
+
+    RETURN result;
+  END $$
 
 /*8.	Find Full Name
 You are given a database schema with tables:
@@ -199,13 +220,25 @@ CREATE PROCEDURE usp_get_holders_full_name()
         ORDER BY full_name;
   END $$
 
-
 /*9.	People with Balance Higher Than
 Your task is to create a stored procedure usp_get_holders_with_balance_higher_than that accepts a number as a parameter
 and returns all people who have more money in total of all their accounts than the supplied number.
 The result should be sorted by first_name then by last_name alphabetically and account id ascending.
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
+
+CREATE PROCEDURE usp_get_holders_with_balance_higher_than(number DOUBLE)
+  BEGIN
+    SELECT first_name, last_name FROM account_holders a_c
+    JOIN accounts a ON a_c.id = a.account_holder_id
+        WHERE (SELECT sum(balance)
+        FROM account_holders
+        JOIN accounts a ON account_holders.id = a.account_holder_id
+        WHERE balance > number
+        GROUP BY first_name);
+  END $$
+
+CALL usp_get_holders_with_balance_higher_than(20);
 
 /*	Future Value Function
 Your task is to create a function ufn_calculate_future_value that accepts as parameters – sum,

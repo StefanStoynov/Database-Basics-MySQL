@@ -343,6 +343,25 @@ Make sure to guarantee exact results working with precision up to fourth sign af
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
 
+CREATE PROCEDURE usp_transfer_money(from_account_id INT, to_account_id INT, amount DECIMAL(20,4))
+  BEGIN
+    START TRANSACTION;
+    CASE WHEN from_account_id < 1
+              OR  to_account_id < 1
+              OR amount > (SELECT a.balance FROM  accounts a WHERE a.id = from_account_id)
+              OR from_account_id = to_account_id
+              OR amount < 0
+    THEN ROLLBACK ;
+    ELSE UPDATE accounts a
+      SET a.balance = a.balance - amount
+      WHERE a.id = from_account_id;
+        UPDATE accounts a
+      SET a.balance = a.balance + amount
+      where a.id  = to_account_id;
+    END CASE ;
+    COMMIT ;
+  END $$
+
 /*15.	Log Accounts Trigger
 Create another table – logs(log_id, account_id, old_sum, new_sum). Add a trigger to the accounts table that enters a
 new entry into the logs table every time the sum on an account changes.

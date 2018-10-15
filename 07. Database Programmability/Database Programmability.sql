@@ -295,6 +295,21 @@ The procedure should produce exact results working with the specified precision.
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
 
+CREATE PROCEDURE usp_deposit_money(account_id INT, money_amount DECIMAL(20,4))
+  BEGIN
+    START TRANSACTION;
+    CASE WHEN money_amount <= 0 OR account_id < 1
+      THEN ROLLBACK;
+    ELSE
+        UPDATE accounts a
+        SET a.balance = a.balance + money_amount
+        WHERE a.id = account_id;
+    END CASE ;
+    COMMIT;
+  END $$
+
+CALL usp_deposit_money(2,10.0001);
+
 /*13.	Withdraw Money
 Add stored procedures usp_withdraw_money(account_id, money_amount) that operate in transactions.
 Make sure to guarantee withdraw is done only when balance is enough and money_amount is valid positive number.
@@ -302,6 +317,8 @@ Work with precision up to fourth sign after decimal point. The procedure should 
 the specified precision.
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
+
+
 
 /*14.	Money Transfer
 Write stored procedure usp_transfer_money(from_account_id, to_account_id, amount) that transfers money

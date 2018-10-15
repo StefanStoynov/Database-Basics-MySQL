@@ -390,3 +390,21 @@ email whenever new record is inserted in logs table. The following data is requi
 •	body - “On {date (current date)} your balance was changed from {old} to {new}.”
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
+
+CREATE TABLE notification_emails(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  recipient INT,
+  subject VARCHAR(50),
+  body TEXT);
+
+CREATE TRIGGER tr_create_notification_email
+  AFTER INSERT
+  ON logs
+  FOR EACH ROW
+  BEGIN
+    INSERT INTO notification_emails (recipient, subject, body)
+    VALUES (NEW.account_id,concat('Balance change for account: ', NEW.account_id),concat('On ', DATE_FORMAT(NOW(), '%b %d %Y'), ' at ', DATE_FORMAT(NOW(), '%r'),' your balance was changed from ',
+                                                                                       New.old_sum, ' to ',
+                                                                                       New.new_sum,'.'));
+  END $$
+

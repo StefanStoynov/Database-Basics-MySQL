@@ -368,6 +368,20 @@ new entry into the logs table every time the sum on an account changes.
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
 
+CREATE TABLE logs(
+  log_id INT PRIMARY KEY AUTO_INCREMENT,
+  account_id INT,
+  old_sum DECIMAL(19,4),
+  new_sum DECIMAL(19,4));
+
+CREATE TRIGGER tr_logs
+  AFTER UPDATE
+  ON accounts
+  FOR EACH ROW
+  BEGIN
+  INSERT INTO logs(account_id, old_sum, new_sum)
+  VALUES (OLD.id, OLD.balance, NEW.balance);
+  END $$
 /*16.	Emails Trigger
 Create another table – notification_emails(id, recipient, subject, body). Add a trigger to logs table to create new
 email whenever new record is inserted in logs table. The following data is required to be filled for each email:

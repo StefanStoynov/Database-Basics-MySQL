@@ -295,7 +295,7 @@ The procedure should produce exact results working with the specified precision.
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
 
-CREATE PROCEDURE usp_deposit_money(account_id INT, money_amount DECIMAL(20,4))
+CREATE PROCEDURE usp_deposit_money(account_id INT, money_amount DECIMAL)
   BEGIN
     START TRANSACTION;
       UPDATE accounts a

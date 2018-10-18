@@ -49,6 +49,7 @@ JOIN users u
 ON p.user_id = u.id
 WHERE p.id BETWEEN 1 and 10;
 
+
 # 03.	Data Update
 
 UPDATE users AS u

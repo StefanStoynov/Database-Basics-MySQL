@@ -147,7 +147,7 @@ Write a function ufn_get_salary_level that receives salary of an employee and re
 Submit your query statement as Run skeleton, run queries & check DB in Judge.
 */
 
-CREATE FUNCTION ufn_get_salary_level(salary_amount DOUBLE)
+CREATE FUNCTION ufn_get_salary_level(salary_amount DOUBLE(10,4))
   RETURNS VARCHAR(10)
   BEGIN
     DECLARE result VARCHAR(10);
@@ -298,14 +298,14 @@ Submit your query statement as Run skeleton, run queries & check DB in Judge.
 CREATE PROCEDURE usp_deposit_money(account_id INT, money_amount DECIMAL(20,4))
   BEGIN
     START TRANSACTION;
-    CASE WHEN money_amount <= 0 OR account_id < 1
-      THEN ROLLBACK;
-    ELSE
-        UPDATE accounts a
+      UPDATE accounts a
         SET a.balance = a.balance + money_amount
         WHERE a.id = account_id;
-    END CASE ;
+    if( money_amount <= 0.0001 OR (SELECT a.id FROM accounts as a WHERE a.id = account_id) IS NULL)
+      THEN ROLLBACK;
+    ELSE
     COMMIT;
+      END IF ;
   END $$
 
 CALL usp_deposit_money(2,10.0001);

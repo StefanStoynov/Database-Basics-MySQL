@@ -68,6 +68,13 @@ SELECT
 FROM users u JOIN locations l ON u.location_id = l.id
 WHERE u.id BETWEEN 10 and 20;
 
+#03. Update
+
+UPDATE chats c
+JOIN messages m ON c.id = m.chat_id
+SET c.start_date = m.sent_on
+WHERE c.start_date > m.sent_on;
+
 #04. Delete
 
 DELETE l

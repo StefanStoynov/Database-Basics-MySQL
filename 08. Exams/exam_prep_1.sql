@@ -84,3 +84,19 @@ JOIN airlines a ON f.airline_id = a.airline_id
 SET t.price = t.price * 1.5
 WHERE a.rating = (SELECT max(rating)FROM airlines);
 
+# 12.	Delayed Customers
+/*
+Extract from the database, the TOP 3 customers, in terms of MOST EXPENSIVE ticket, which’s flights have
+status – ‘Delayed’.
+Take only the customer’s id, full name, ticket price and flight destination airport name.
+ORDER the results ascending, by customer id.
+*/
+
+SELECT c.customer_id, concat(c.first_name, ' ',c.last_name), t.price, a.airport_name
+FROM customers c
+JOIN tickets t on c.customer_id = t.customer_id
+JOIN flights f ON t.flight_id = f.flight_id
+JOIN airports a ON a.airport_id= f.destination_airport_id
+WHERE f.status = 'Delayed'
+ORDER BY t.price DESC
+LIMIT 3;

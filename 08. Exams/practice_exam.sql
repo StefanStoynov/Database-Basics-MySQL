@@ -68,6 +68,12 @@ SELECT
 FROM users u JOIN locations l ON u.location_id = l.id
 WHERE u.id BETWEEN 10 and 20;
 
+#04. Delete
+
+DELETE l
+FROM locations l
+LEFT JOIN users u ON l.id = u.location_id
+WHERE u.nickname is NULL;
 
 
 #05. Age Range

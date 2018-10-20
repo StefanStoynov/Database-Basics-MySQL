@@ -54,6 +54,22 @@ ALTER TABLE users
 ALTER TABLE users_chats
     ADD PRIMARY KEY (user_id, chat_id);
 
+#02. Insert
+
+INSERT INTO messages(content, sent_on, chat_id, user_id)
+SELECT
+       (concat(u.age,'-',u.gender,'-',l.latitude,'-',l.longitude))`content`,
+       ('2016-12-15') `sent_on`,
+        CASE u.gender
+          WHEN 'F' THEN ceil(sqrt(u.age * 2))
+          WHEN 'M' THEN ceil(pow(u.age/18,3))
+        end `chat_id`,
+       u.id `user_id`
+FROM users u JOIN locations l ON u.location_id = l.id
+WHERE u.id BETWEEN 10 and 20;
+
+
+
 #05. Age Range
 
 SELECT u.nickname, u.gender, u.age FROM users u

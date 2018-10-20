@@ -100,3 +100,18 @@ JOIN airports a ON a.airport_id= f.destination_airport_id
 WHERE f.status = 'Delayed'
 ORDER BY t.price DESC
 LIMIT 3;
+
+#13.	Last Departing Flights
+/*
+Extract from the database, the LAST 5 flights, which will depart (have a status – ‘Departing’).
+Take only the flight’s id, departure time, arrival time, origin and destination airport names.
+ORDER the results ascending by departure time, and ascending by flight id as second criteria.
+*/
+
+SELECT f2.flight_id, f2.departure_time, f2.arrival_time, a3.airport_name `origin`, a4.airport_name `destination`
+FROM (SELECT f.flight_id, f.departure_time, f.arrival_time, f.origin_airport_id, f.destination_airport_id FROM flights f
+WHERE f.status = 'Departing'
+ORDER BY f.departure_time DESC
+LIMIT 5) `f2` JOIN airports a3 on f2.origin_airport_id = a3.airport_id
+JOIN airports a4 ON f2.destination_airport_id = a4.airport_id
+ORDER BY f2.departure_time,f2.flight_id;

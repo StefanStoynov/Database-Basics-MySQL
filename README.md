@@ -16,3 +16,4 @@ Total: <b>~70</b> hours<br>
 7. Subqueries and JOINs<br>
 8. Functions, Triggers, Transactions<br>
 
+![download](https://user-images.githubusercontent.com/33524282/47457986-2f8a3400-d7e1-11e8-8445-490031c5d580.png)
